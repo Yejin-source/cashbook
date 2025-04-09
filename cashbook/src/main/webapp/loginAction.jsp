@@ -4,17 +4,18 @@
 
 <!-- Controller -->
 <%
+	// 사용자로부터 입력받은 값 추출
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
 	
-	// 요청받은 값 확인
+	// 입력받은 값 확인
 	System.out.println("loginAction.jsp id: " + id);
 	System.out.println("loginAction.jsp pw: " + pw);
 	
-	// model 객체 생성
+	// AdminDao(medel) 객체 생성 후 로그인 메서드 호출
 	AdminDao adminDao = new AdminDao();
 	Admin admin = new Admin();
-	// 로그인 메서드 사용
+	// 로그인 메서드 실행
 	admin = adminDao.loginAdminPw(id, pw);
 	
 	if(admin != null) { // 로그인 성공 시 카테고리 목록으로 redirect
