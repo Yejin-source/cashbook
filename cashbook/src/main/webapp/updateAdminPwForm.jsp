@@ -3,9 +3,9 @@
 <!-- Controller -->
 <%	
 	// 로그인 상태 확인
-	Integer login = (Integer)(session.getAttribute("id")); // 세션에서 id 키에 저장된 값을 가져옴
+	String login = (String)(session.getAttribute("id")); // 세션에서 id 키에 저장된 값을 가져옴
 	
-	if(login != null) { // 로그인 상태라면
+	if(login == null) { // 로그아웃 상태라면
 		response.sendRedirect("/cashbook/loginForn.jsp");
 		return; // 코드 실행 중단
 	}
@@ -25,11 +25,12 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-	<h1>비밀번호 변경</h1>
 	<!-- nav.jsp 인클루드 -->
 	<div>
 		<jsp:include page="/inc/nav.jsp"></jsp:include>
 	</div>
+	
+	<h1>비밀번호 변경</h1>
 	
 	<form action="/cashbook/updateAdminPwAction.jsp" method="post">
 		<table class="table table-striped table-hover">
@@ -50,7 +51,7 @@
 				<td><input type="password" name="newPwCheck"></td>
 			</tr>
 		</table>
-		<button type="submit">로그인</button>
+		<button type="submit">변경하기</button>
 	</form>
 </body>
 </html>
