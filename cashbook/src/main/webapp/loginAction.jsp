@@ -18,7 +18,8 @@
 	// 로그인 메서드 실행
 	admin = adminDao.loginAdminPw(id, pw);
 	
-	if(admin != null) { // 로그인 성공 시 카테고리 목록으로 redirect
+	if(admin.getId() != null) { // 로그인 성공 시 카테고리 목록으로 redirect
+		session.setAttribute("id", id); // key값으로 object(value)를 찾는다고 생각하기
 		response.sendRedirect("/cashbook/categoryList.jsp");
 	} else { // 로그인 실패 시 로그인 홈으로
 		System.out.println("아이디 혹은 비밀번호가 일치하지 않습니다.");
