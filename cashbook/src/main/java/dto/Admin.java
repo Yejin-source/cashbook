@@ -17,6 +17,7 @@ public class Admin {
 		this.pw = pw;
 	}
 	
+	@Override
 	public String toString() {
 		return "Admin [id=" + id + ", pw=" + pw + "]";
 	}

@@ -28,4 +28,10 @@ public class Paging {
 		}
 		return lastPage;
 	}
+	
+	@Override
+	public String toString() {
+		return "Paging [currentPage=" + currentPage + ", rowPerPage=" + rowPerPage + "]";
+	}
+	
 }
