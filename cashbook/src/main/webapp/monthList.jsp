@@ -64,11 +64,8 @@
 		nextMonth = 0;
 		nextYear++;
 	}
-		
-	
-	ArrayList<Cash> list = new ArrayList<>();
-	
-	
+
+	CashDao csDao = new CashDao();
 
 %>
 
@@ -186,10 +183,19 @@
 									&nbsp;
 							<%		
 								} else {
-							%>
+									int day = i-startBlank;
+							%>	
 									<a href="">
-										<%=i-startBlank%>
+										<%=day%>
 									</a>
+									<%
+										ArrayList<Cash> list = new ArrayList<>();
+										list = csDao.selectCashByDate(year+"-"+month+"-"+day);
+										
+										for(Cash c : list){ // for(자료형 변수 : 배열) -> 배열에 맞는 자료형 작성
+											%><%=c.getMemo()%><%
+										}
+									%>
 							<%		
 								}
 							%>

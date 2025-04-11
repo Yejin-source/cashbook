@@ -12,7 +12,7 @@ import dto.Cash;
 public class CashDao {
 	
 	// 날짜별 전체 데이터 가져오는 메서드
-	public ArrayList<Cash> selectCashByDate(String cashDate) throws ClassNotFoundException, SQLException {
+	public ArrayList<Cash> selectCashByDate(String cashDate) throws Exception {
 		ArrayList<Cash> list = new ArrayList<>();
 		
 		// MySQL JDBC 드라이버 로드
@@ -26,9 +26,9 @@ public class CashDao {
 		
 		// 쿼리 작성
 		String sql = "SELECT cash_no cashNo, category_no categoryNo, cash_date cashDate, amount, memo, color, createdate, updatedate"
-						+ " FROM cash WHERE cash_date LIKE ?";
+						+ " FROM cash WHERE cash_date = ?";
 		stmt = conn.prepareStatement(sql);
-		stmt.setString(1, "%"+cashDate+"%");
+		stmt.setString(1, cashDate);
 		System.out.println("CategoryDao.java selectCategoryListByKind_stmt: " + stmt); // 쿼리 디버깅
 		rs = stmt.executeQuery(); // 쿼리 실행
 		
