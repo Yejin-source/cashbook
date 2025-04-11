@@ -12,15 +12,15 @@
 	}
 	
 	// 요청받은 값 가져오기
-	int no = Integer.parseInt(request.getParameter("no"));
+	int categoryNo = Integer.parseInt(request.getParameter("categoryNo"));
 	// 받은 값 확인
-	System.out.println("updateCategoryTitleForm.jsp no: " + no);
+	System.out.println("updateCategoryTitleForm.jsp categoryNo: " + categoryNo);
 	
 	
 	// 객체 생성
 	Category c = new Category();
 	CategoryDao categoryDao = new CategoryDao();
-	c = categoryDao.selectCategoryOne(no);
+	c = categoryDao.selectCategoryOne(categoryNo);
 
 %>
 
@@ -39,11 +39,11 @@
 <body>
 	<h1>제목 수정</h1>
 	<form action="updateCategoryTitleAction.jsp" method="post">
-	<input type="hidden" name="no" value="no">
+	<input type="hidden" name="categoryNo" value="<%=c.getCategoryNo()%>"> <!-- value 수정 -->
 		<table class="table table-striped table-hover">
 			<tr>
 				<th>번호</th>
-				<td><input type="text" name="no" value="<%=c.getNo()%>" readonly></td>
+				<td><input type="text" name="categoryNo" value="<%=c.getCategoryNo()%>" readonly></td>
 			</tr>
 			<tr>
 				<th>종류</th>

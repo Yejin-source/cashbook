@@ -18,7 +18,7 @@
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	}
 	
-	int rowPerPage = 5;
+	int rowPerPage = 15;
 	
 	// Paging 객체 생성 후 값 설정
 	Paging paging = new Paging();
@@ -66,7 +66,7 @@
 					for(Category c: list) {
 				%>
 						<tr>
-							<td><%=c.getNo()%></td>
+							<td><%=c.getCategoryNo()%></td>
 							<td>
 								<%
 									if(c.getKind().equals("expense")) {
@@ -83,8 +83,8 @@
 							<td><%=c.getTitle()%></td>
 							<td><%=c.getCreatedate()%></td>
 							<td> <!-- 링크에 값 넘기는 거 그만 까먹기로 해요 우리.............. -->
-								<a href="/cashbook/updateCategoryTitleForm.jsp?no=<%=c.getNo()%>">[수정]</a> /
-								<a href="/cashbook/deleteCategory.jsp">[삭제]</a>
+								<a href="/cashbook/updateCategoryTitleForm.jsp?categoryNo=<%=c.getCategoryNo()%>">[수정]</a> /
+								<a href="/cashbook/deleteCategory.jsp?categoryNo=<%=c.getCategoryNo()%>">[삭제]</a>
 							</td>
 						</tr>
 				<%		

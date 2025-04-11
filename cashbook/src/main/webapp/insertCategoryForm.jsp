@@ -17,8 +17,10 @@
 		<table class="table table-striped table-hover">
 			<tr>
 				<th>종류</th>
-				<td><input type="radio" name="kind" value="expense">지출</td>
-				<td><input type="radio" name="kind" value="income">수입</td>
+				<td>
+					<input type="radio" name="kind" value="expense"> 지출 <br>
+					<input type="radio" name="kind" value="income"> 수입
+				</td>
 			</tr>
 			<tr>
 				<th>제목</th>
