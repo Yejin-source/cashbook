@@ -14,5 +14,5 @@
 	categoryDao.deleteCategory(categoryNo);
 	
 	// 삭제 성공 시 카테고리 목록으로
-	response.sendRedirect("/cashbook/categoryList.jsp");
+	response.sendRedirect("/cashbook/category/categoryList.jsp");
 %>

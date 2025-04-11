@@ -13,7 +13,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-	<form action="insertCategoryAction.jsp" method="post">
+	<h1>카테고리 추가</h1>
+	<form action="/cashbook/category/insertCategoryAction.jsp" method="post">
 		<table class="table table-striped table-hover">
 			<tr>
 				<th>종류</th>

@@ -7,7 +7,7 @@
 	// 로그인 상태 확인
 	String login = (String)(session.getAttribute("id"));
 	if(login == null) { // 로그아웃 상태라면
-		response.sendRedirect("/cashbook/loginForm.jsp");
+		response.sendRedirect("/cashbook/login/loginForm.jsp");
 		return; // 코드 실행 중단
 	}
 	
@@ -38,7 +38,7 @@
 </head>
 <body>
 	<h1>제목 수정</h1>
-	<form action="updateCategoryTitleAction.jsp" method="post">
+	<form action="/cashbook/category/updateCategoryTitleAction.jsp" method="post">
 	<input type="hidden" name="categoryNo" value="<%=c.getCategoryNo()%>"> <!-- value 수정 -->
 		<table class="table table-striped table-hover">
 			<tr>

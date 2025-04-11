@@ -20,7 +20,7 @@
 	
 	// 새 비밀번호 확인이 일치하지 않으면
 	if(!newPw.equals(newPwCheck)) {
-	    response.sendRedirect("/cashbook/updateAdminPwForm.jsp"); // 비밀번호 변경 폼으로 리디렉션
+	    response.sendRedirect("/cashbook/login/updateAdminPwForm.jsp"); // 비밀번호 변경 폼으로 리디렉션
 	    return; // 코드 실행 중단
 	}
 	
@@ -29,5 +29,5 @@
 	admindao.updateAdminPw(id, pw, newPw);
 
 	// 비밀번호 변경 후 로그인 페이지로 redirect
-	response.sendRedirect("/cashbook/loginForm.jsp");
+	response.sendRedirect("/cashbook/login/loginForm.jsp");
 %>

@@ -8,7 +8,7 @@
 	// 로그인 상태 확인
 	String login = (String)(session.getAttribute("id"));
 	if(login == null) { // 로그아웃 상태라면
-		response.sendRedirect("/cashbook/loginForm.jsp");
+		response.sendRedirect("/cashbook/login/loginForm.jsp");
 		return; // 코드 실행 중단
 	}
 	
@@ -83,8 +83,8 @@
 							<td><%=c.getTitle()%></td>
 							<td><%=c.getCreatedate()%></td>
 							<td> <!-- 링크에 값 넘기는 거 그만 까먹기로 해요 우리.............. -->
-								<a href="/cashbook/updateCategoryTitleForm.jsp?categoryNo=<%=c.getCategoryNo()%>">[수정]</a> /
-								<a href="/cashbook/deleteCategory.jsp?categoryNo=<%=c.getCategoryNo()%>">[삭제]</a>
+								<a href="/cashbook/category/updateCategoryTitleForm.jsp?categoryNo=<%=c.getCategoryNo()%>">[수정]</a> /
+								<a href="/cashbook/category/deleteCategory.jsp?categoryNo=<%=c.getCategoryNo()%>">[삭제]</a>
 							</td>
 						</tr>
 				<%		

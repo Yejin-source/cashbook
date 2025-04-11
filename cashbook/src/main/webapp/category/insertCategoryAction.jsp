@@ -22,5 +22,5 @@
 	categoryDao.insertCategory(category);
 	
 	// 카테고리 추가 성공 시 카테고리 목록으로 
-	response.sendRedirect("/cashbook/categoryList.jsp");
+	response.sendRedirect("/cashbook/category/categoryList.jsp");
 %>

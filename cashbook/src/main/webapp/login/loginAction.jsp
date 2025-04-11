@@ -20,9 +20,9 @@
 	
 	if(admin.getId() != null) { // 로그인 성공 시 카테고리 목록으로 redirect
 		session.setAttribute("id", id); // key값으로 object(value)를 찾는다고 생각하기
-		response.sendRedirect("/cashbook/categoryList.jsp");
+		response.sendRedirect("/cashbook/category/categoryList.jsp");
 	} else { // 로그인 실패 시 로그인 홈으로
 		System.out.println("아이디 혹은 비밀번호가 일치하지 않습니다.");
-		response.sendRedirect("/cashbook/loginForm.jsp");
+		response.sendRedirect("/cashbook/login/loginForm.jsp");
 	}
 %>

@@ -19,5 +19,5 @@
 	categorydao.updateCategoryTitle(title, categoryNo);
 
 	// 수정 완료 시 카테고리 목록으로
-	response.sendRedirect("/cashbook/categoryList.jsp");
+	response.sendRedirect("/cashbook/category/categoryList.jsp");
 %>
