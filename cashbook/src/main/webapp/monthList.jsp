@@ -65,6 +65,8 @@
 		nextYear++;
 	}
 
+	
+	// CashDao 객체 형성
 	CashDao csDao = new CashDao();
 
 %>
@@ -187,13 +189,13 @@
 							%>	
 									<a href="">
 										<%=day%>
-									</a>
+									</a><br>
 									<%
 										ArrayList<Cash> list = new ArrayList<>();
-										list = csDao.selectCashByDate(year+"-"+month+"-"+day);
+										list = csDao.selectCashByDate(year+"-"+month+"-"+day); // 쿼리 수정해서 오류 수정 필요
 										
 										for(Cash c : list){ // for(자료형 변수 : 배열) -> 배열에 맞는 자료형 작성
-											%><%=c.getMemo()%><%
+											%><%=c.getCategoryNo()%><%
 										}
 									%>
 							<%		

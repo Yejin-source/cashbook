@@ -25,8 +25,8 @@ public class CashDao {
 		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cashbook", "root", "java1234");
 		
 		// 쿼리 작성
-		String sql = "SELECT cash_no cashNo, category_no categoryNo, cash_date cashDate, amount, memo, color, createdate, updatedate"
-						+ " FROM cash WHERE cash_date = ?";
+		String sql = "SELECT ct.kind kind, ct.title title, c.color color FROM cash c INNER JOIN category ct"
+						+ " ON c.category_no = ct.category_no FROM cash WHERE cash_date = ?";
 		stmt = conn.prepareStatement(sql);
 		stmt.setString(1, cashDate);
 		System.out.println("CategoryDao.java selectCategoryListByKind_stmt: " + stmt); // 쿼리 디버깅
