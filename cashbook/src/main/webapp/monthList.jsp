@@ -120,20 +120,21 @@
 							<%		
 								} else {
 									int date = i-startBlank;
+									String cashDate = String.format("%04d-%02d-%02d", year, month+1, date); // yyyy-mm-dd 형식으로 설정
+									// %04 -> 총 4자리로 표현, 부족한만큼 앞을 0으로 채우기 | d -> 정수
 							%>	
-									<a href="">
+									<a href="/cashbook/dateList.jsp?cashDate=<%=cashDate%>">
 										<%=date%>
 									</a><br>
 									<%
 										ArrayList<Cash> list = new ArrayList<>();
-										String cashDate = String.format("%04d-%02d-%02d", year, month+1, date); // yyyy-mm-dd 형식으로 설정
-										// %04 -> 총 4자리로 표현, 부족한만큼 앞을 0으로 채우기 | d -> 정수
 										list = csDao.selectCashByDate(cashDate);
 										
 										for(Cash c : list){ // for(자료형 변수 : 배열) -> 배열에 맞는 자료형 작성
 									%>
-												[<%=c.getCategory().getKind()%>]&nbsp;
+												[<%=c.getCategory().getKind()%>]
 												<%=c.getCategory().getTitle()%><br>
+												<%=c.getAmount()%>원<br>
 									<%
 										}
 									%>
@@ -145,7 +146,7 @@
 						if(i % 7 == 0) { // 한 행이 7열이 되도록
 				%>
 							</tr><tr>
-				<%				
+				<%			
 						}
 					}
 				%>
