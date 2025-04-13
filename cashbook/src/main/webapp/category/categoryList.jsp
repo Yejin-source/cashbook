@@ -67,19 +67,7 @@
 				%>
 						<tr>
 							<td><%=c.getCategoryNo()%></td>
-							<td>
-								<%
-									if(c.getKind().equals("expense")) {
-								%>
-										지출
-								<%		
-									} else {
-								%>
-										수입
-								<%		
-									}
-								%>	
-							</td>
+							<td><%=c.getKind()%></td>
 							<td><%=c.getTitle()%></td>
 							<td><%=c.getCreatedate()%></td>
 							<td> <!-- 링크에 값 넘기는 거 그만 까먹기로 해요 우리.............. -->

@@ -77,83 +77,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Month List</title>
-    <style>
-        /* 전체 페이지 스타일 */
-        body {
-            font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
-            background-color: #f9f9f9;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        /* 달력 테이블 */
-        table {
-            width: 100%;
-            max-width: 600px;
-            margin: 20px auto;
-            border-collapse: collapse;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            height: 60px;
-            width: 14.2%; /* 7열 맞추기 */
-            text-align: center;
-            vertical-align: middle;
-            font-size: 16px;
-        }
-
-        th {
-            background-color: #f0f0f0;
-            font-weight: bold;
-            color: #555;
-        }
-
-        td {
-            background-color: #fff;
-        }
-
-        td:hover {
-            background-color: #fdf5d6;
-            cursor: pointer;
-        }
-
-        /* 요일 색상 */
-        .sunday {
-            color: red;
-        }
-
-        .saturday {
-            color: blue;
-        }
-
-        /* 오늘 날짜 강조 */
-        .today {
-            background-color: #ffeaa7;
-            font-weight: bold;
-            border: 2px solid #e17055;
-        }
-
-        /* 이전/다음 달 버튼 */
-        .calendar-nav a {
-            margin: 0 10px;
-            text-decoration: none;
-            color: #2d3436;
-            font-weight: bold;
-        }
-
-        .calendar-nav a:hover {
-            color: #0984e3;
-        }
-    </style>
+<style>
+	table {
+	    table-layout: fixed; /* 열 너비 고정 */
+	    width: 60%;
+	}
+	th, td {
+    text-align: center;         /* 가로 정렬 */
+    vertical-align: middle;     /* 세로 정렬 */
+    height: 70px; /* 원하는 고정 높이 값 */
+	}
+</style>
 </head>
 <body>
 	<h1>
@@ -163,8 +97,8 @@
 		<a href="/cashbook/monthList.jsp?targetYear=<%=prevYear%>&targetMonth=<%=prevMonth%>">[이전 달]</a>
 		<a href="/cashbook/monthList.jsp?targetYear=<%=nextYear%>&targetMonth=<%=nextMonth%>">[다음 달]</a>
 	</div>
-	<form>
-		<table>
+	<form method="post">
+		<table border="1">
 			<tr>
 				<th>일</th>
 				<th>월</th>
@@ -185,17 +119,22 @@
 									&nbsp;
 							<%		
 								} else {
-									int day = i-startBlank;
+									int date = i-startBlank;
 							%>	
 									<a href="">
-										<%=day%>
+										<%=date%>
 									</a><br>
 									<%
 										ArrayList<Cash> list = new ArrayList<>();
-										list = csDao.selectCashByDate(year+"-"+month+"-"+day); // 쿼리 수정해서 오류 수정 필요
+										String cashDate = String.format("%04d-%02d-%02d", year, month+1, date); // yyyy-mm-dd 형식으로 설정
+										// %04 -> 총 4자리로 표현, 부족한만큼 앞을 0으로 채우기 | d -> 정수
+										list = csDao.selectCashByDate(cashDate);
 										
 										for(Cash c : list){ // for(자료형 변수 : 배열) -> 배열에 맞는 자료형 작성
-											%><%=c.getCategoryNo()%><%
+									%>
+												[<%=c.getCategory().getKind()%>]&nbsp;
+												<%=c.getCategory().getTitle()%><br>
+									<%
 										}
 									%>
 							<%		

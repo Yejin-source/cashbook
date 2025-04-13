@@ -48,9 +48,9 @@
 			<tr>
 				<th>종류</th>
 				<td>
-					<input type="radio" name="kind" value="expense" <%=c.getKind().equals("expense") ? "checked" : ""%> disabled>지출
+					<input type="radio" name="kind" value="지출" <%=c.getKind().equals("지출") ? "checked" : ""%> disabled>지출
 					&nbsp;
-					<input type="radio" name="kind" value="income" <%=c.getKind().equals("income") ? "checked" : ""%> disabled>수입
+					<input type="radio" name="kind" value="수입" <%=c.getKind().equals("수입") ? "checked" : ""%> disabled>수입
 				</td>
 			</tr>
 			<tr>

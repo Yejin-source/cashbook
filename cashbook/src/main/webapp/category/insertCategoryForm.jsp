@@ -19,8 +19,8 @@
 			<tr>
 				<th>종류</th>
 				<td>
-					<input type="radio" name="kind" value="expense"> 지출 <br>
-					<input type="radio" name="kind" value="income"> 수입
+					<input type="radio" name="kind" value="지출"> 지출 <br>
+					<input type="radio" name="kind" value="수입"> 수입
 				</td>
 			</tr>
 			<tr>

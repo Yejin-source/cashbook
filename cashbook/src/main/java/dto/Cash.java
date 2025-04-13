@@ -9,6 +9,7 @@ public class Cash {
 	private String color;
 	private String createdate;
 	private String updatedate;
+	private Category category; // category 객체 포함
 	
 	public int getCashNo() {
 		return cashNo;
@@ -59,11 +60,17 @@ public class Cash {
 		this.updatedate = updatedate;
 	}
 	
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
 	@Override
 	public String toString() {
 		return "Cash [cashNo=" + cashNo + ", categoryNo=" + categoryNo + ", cashDate=" + cashDate + ", amount=" + amount
 				+ ", memo=" + memo + ", color=" + color + ", createdate=" + createdate + ", updatedate=" + updatedate
-				+ "]";
+				+ ", category=" + category + "]";
 	}
-	
 }

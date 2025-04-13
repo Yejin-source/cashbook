@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dto.Cash;
+import dto.Category;
 
 public class CashDao {
 	
@@ -25,8 +26,9 @@ public class CashDao {
 		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cashbook", "root", "java1234");
 		
 		// 쿼리 작성
-		String sql = "SELECT ct.kind kind, ct.title title, c.color color FROM cash c INNER JOIN category ct"
-						+ " ON c.category_no = ct.category_no FROM cash WHERE cash_date = ?";
+		String sql = "SELECT c.cash_no cashNo, c.category_no categoryNo, c.cash_date cashDate, c.amount amount, c.memo memo"
+						+ ", c.color color, c.createdate createdate, c.updatedate updatedate, ct.kind kind, ct.title title"
+						+ " FROM cash c INNER JOIN category ct ON c.category_no = ct.category_no WHERE c.cash_date = ?";
 		stmt = conn.prepareStatement(sql);
 		stmt.setString(1, cashDate);
 		System.out.println("CategoryDao.java selectCategoryListByKind_stmt: " + stmt); // 쿼리 디버깅
@@ -42,6 +44,12 @@ public class CashDao {
 			c.setColor(rs.getString("color"));
 			c.setCreatedate(rs.getString("createdate"));
 			c.setUpdatedate(rs.getString("updatedate"));
+			
+			Category ct = new Category();
+			ct.setKind(rs.getString("kind"));
+			ct.setTitle(rs.getString("title"));
+			c.setCategory(ct); // Category 정보를 Cash에 포함
+			
 			list.add(c);
 		}
 		conn.close(); // 연결 해제
