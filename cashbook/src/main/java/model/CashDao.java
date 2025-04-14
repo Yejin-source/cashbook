@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import dto.Cash;
 import dto.Category;
+import dto.Receit;
 
 public class CashDao {
 	
@@ -27,8 +28,9 @@ public class CashDao {
 		
 		// 쿼리 작성
 		String sql = "SELECT c.cash_no cashNo, c.category_no categoryNo, c.cash_date cashDate, c.amount amount, c.memo memo"
-						+ ", c.color color, c.createdate createdate, c.updatedate updatedate, ct.kind kind, ct.title title"
-						+ " FROM cash c INNER JOIN category ct ON c.category_no = ct.category_no WHERE c.cash_date = ?";
+						+ ", c.color color, c.createdate createdate, c.updatedate updatedate, ct.kind kind, ct.title title, r.filename filename"
+						+ " FROM cash c INNER JOIN category ct ON c.category_no = ct.category_no"
+						+ " INNER JOIN receit r ON c.cash_no = r.cash_no WHERE c.cash_date = ?";
 		stmt = conn.prepareStatement(sql);
 		stmt.setString(1, cashDate);
 		System.out.println("CategoryDao.java selectCategoryListByKind_stmt: " + stmt); // 쿼리 디버깅
@@ -49,6 +51,10 @@ public class CashDao {
 			ct.setKind(rs.getString("kind"));
 			ct.setTitle(rs.getString("title"));
 			c.setCategory(ct); // Category 정보를 Cash에 포함
+			
+			Receit r = new Receit();
+			r.setFilename(rs.getString("filename"));
+			c.setReceit(r); // Receit 정보를 Cash에 포함
 			
 			list.add(c);
 		}

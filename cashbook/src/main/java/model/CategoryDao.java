@@ -129,11 +129,11 @@ public class CategoryDao {
 		
 		while(rs.next()) {
 			Category c = new Category();
-			c.setCategoryNo(rs.getInt(""));
-			c.setTitle(rs.getString(""));
+			c.setCategoryNo(rs.getInt("categoryNo"));
+			c.setTitle(rs.getString("title"));
 		}
 		conn.close(); // 연결 해제
-		return null;
+		return list;
 	}
 	
 	

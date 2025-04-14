@@ -39,7 +39,7 @@
 <body>
 	<h1><%=cashDate%> 수입/지출</h1>
 	<div>
-		<a href="/cashbook/insertCashForm.jsp?cashDate=<%=cashDate%>">내역 추가</a>
+		<a href="/cashbook/cash/insertCashForm.jsp?cashDate=<%=cashDate%>">내역 추가</a>
 	</div>
 	<form method="post">
 		<table class="table table-striped table-hover">
