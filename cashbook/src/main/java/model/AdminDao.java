@@ -23,7 +23,7 @@ public class AdminDao {
 	
 	// 로그인 메서드
 	public Admin loginAdminPw(String id, String pw) throws ClassNotFoundException, SQLException {
-		Admin admin = null; // 로그인 실패 시 null 반환
+		Admin admin = new Admin(); // admin 객체가 미리 생성되게 수정
 		
 		// MySQL JDBC 드라이버 로드
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -44,7 +44,6 @@ public class AdminDao {
 		
 		// 로그인 성공 시 Admin 객체 생성
 		if(rs.next()) {
-			admin = new Admin();
 			admin.setId(rs.getString("adminId")); // adminId 값을 Admin 객체에 저장
 			admin.setPw(rs.getString("adminPw")); // adminPw 값을 Admin 객체에 저장
 			System.out.println("로그인 성공");
@@ -53,7 +52,7 @@ public class AdminDao {
 		}
 		
 		conn.close(); // 연결 해제
-		return admin; // 로그인 성공 시 admin 객체 반환, 실패 시 null 반환
+		return admin; // 로그인 성공 시 admin 객체 반환
 	}
 	
 	

@@ -20,14 +20,24 @@
 	
 	// 새 비밀번호 확인이 일치하지 않으면
 	if(!newPw.equals(newPwCheck)) {
+	    System.out.println("새 비밀번호 확인이 일치하지 않습니다.");
 	    response.sendRedirect("/cashbook/login/updateAdminPwForm.jsp"); // 비밀번호 변경 폼으로 리디렉션
 	    return; // 코드 실행 중단
 	}
 	
 	// AdminDao(model) 객체 생성 후 비밀번호 변경 메서드 호출
 	AdminDao admindao = new AdminDao();
-	admindao.updateAdminPw(id, pw, newPw);
+	int result = admindao.updateAdminPw(id, pw, newPw);
 
-	// 비밀번호 변경 후 로그인 페이지로 redirect
-	response.sendRedirect("/cashbook/login/loginForm.jsp");
+	
+	if(result == 1) {
+		// 비밀번호 변경 성공 시 
+		System.out.println("비밀번호가 변경되었습니다.");
+		session.invalidate(); // 세션 초기화
+		response.sendRedirect("/cashbook/login/loginForm.jsp");
+	} else {
+		// 비밀번호 변경 실패 시
+		System.out.println("다시 입력해 주세요.");
+		response.sendRedirect("/cashbook/login/loginForm.jsp"); // 다시 수정 페이지로 이동
+	}
 %>

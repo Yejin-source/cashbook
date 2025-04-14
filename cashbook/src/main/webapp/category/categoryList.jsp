@@ -50,6 +50,9 @@
 		<jsp:include page="/inc/nav.jsp"></jsp:include>
 	</div>
 	<h1>Category List</h1>
+	<div>
+		<a href="/cashbook/login/logout.jsp">로그아웃</a>
+	</div>
 	<form method="post">
 		<table class="table table-striped table-hover">
 			<thead>
