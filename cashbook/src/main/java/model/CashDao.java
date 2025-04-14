@@ -61,4 +61,66 @@ public class CashDao {
 		conn.close(); // 연결 해제
 		return list;
 	}
+	
+	
+	// 상세정보 메서드
+	public Cash selectCashOne(int num) throws Exception {
+		Cash cash = null;
+		
+		// MySQL JDBC 드라이버 로드
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		// DB 연결을 위한 객체 선언
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		// DB 연결
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cashbook", "root", "java1234");
+				
+		// 쿼리 작성
+		String sql = "select c.cash_date cashDate, ct.kind, ct.title, c.amount, c.memo"
+						+ " from cash c INNER JOIN category ct ON cs.category_no = ct.category_no WHERE cash_no = ?";
+		stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, num);
+		rs = stmt.executeQuery();
+		
+		while (rs.next()) {
+			cash = new Cash();
+			cash.setCashDate(rs.getString("cashDate"));
+			cash.setAmount(rs.getInt("amount"));
+			cash.setMemo(rs.getString("memo"));
+			
+			Category category = new Category();
+			category.setKind(rs.getString("kind"));
+			category.setTitle(rs.getString("title"));
+			
+			cash.setCategory(category); // Category 정보를 Cash에 포함
+		}
+		conn.close();
+		return cash;
+	}
+	
+	
+	// cash 추가 메서드
+	public void insertCash(Cash c) throws Exception {
+		
+		// MySQL JDBC 드라이버 로드
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		// DB 연결을 위한 객체 선언
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		// DB 연결
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cashbook", "root", "java1234");
+		
+		// 쿼리 작성
+		String sql = "INSERT INTO cash(category_no, cash_date, amount, memo, color) VALUES(?,?,?,?,?)";
+		stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, c.getCategoryNo());
+		stmt.setString(2, c.getCashDate());
+		stmt.setInt(3, c.getAmount());
+		stmt.setString(4, c.getMemo());
+		stmt.setString(5, c.getColor());
+		stmt.executeUpdate();
+		
+		conn.close();
+	}
 }
