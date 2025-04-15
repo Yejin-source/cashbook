@@ -2,7 +2,7 @@
 <%@ page import="dto.*" %>
 <%@ page import="model.*" %>
 
-<!-- View -->
+<!-- Controller -->
 <%
 	// 입력된 값 받아오기
 	String cashDate = request.getParameter("cashDate");
@@ -10,6 +10,7 @@
 	int amount = Integer.parseInt(request.getParameter("amount"));
 	String memo = request.getParameter("memo");
 	String color = request.getParameter("color");
+	String kind = request.getParameter("kind");
 
 	// 받은 값 확인
 	System.out.println("insertCashAction.jsp cashDate: " + cashDate);
@@ -17,6 +18,7 @@
 	System.out.println("insertCashAction.jsp amount: " + amount);
 	System.out.println("insertCashAction.jsp memo: " + memo);
 	System.out.println("insertCashAction.jsp color: " + color);
+	System.out.println("insertCashAction.jsp kind: " + kind);
 	
 	// Cash 객체 생성 후
 	Cash c = new Cash();

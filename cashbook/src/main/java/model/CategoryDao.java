@@ -107,7 +107,7 @@ public class CategoryDao {
 	}
 	
 	
-	//
+	// 카테고리 종류별 값 메서드
 	public ArrayList<Category> selectCategoryListByKind(String kind) throws Exception {
 		ArrayList<Category> list = new ArrayList<>();
 		
@@ -124,13 +124,14 @@ public class CategoryDao {
 		String sql = "SELECT category_no categoryNo, title FROM category WHERE kind = ?";
 		stmt = conn.prepareStatement(sql);
 		stmt.setString(1, kind);
-		System.out.println("CategoryDao.java selectCategoryListByKind_stmt: " + stmt); // 쿼리 디버깅
+		//System.out.println("CategoryDao.java selectCategoryListByKind_stmt: " + stmt); // 쿼리 디버깅
 		rs = stmt.executeQuery(); // 쿼리 실행
 		
 		while(rs.next()) {
 			Category c = new Category();
 			c.setCategoryNo(rs.getInt("categoryNo"));
 			c.setTitle(rs.getString("title"));
+			list.add(c);
 		}
 		conn.close(); // 연결 해제
 		return list;

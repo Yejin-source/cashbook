@@ -19,7 +19,7 @@
 	// insertCashForm.jsp -> kind 선택(String kind)
 	String kind = request.getParameter("kind");
 	
-	ArrayList<Category> list = null;
+	ArrayList<Category> list = new ArrayList<>();
 	if(kind != null) { // insertCashForm.jsp에서 kind 선택 후 재요청
 		// DB: 선택된 kind의 title 목록
 		CategoryDao categoryDao = new CategoryDao();
@@ -63,9 +63,9 @@
 		<select name="categoryNo" id="categoryNo">
 		<%
 			if (list != null) {
-				for (Category c : list) {	
+				for (Category c : list) {
 		%>
-			<option value="<%=c.getCategoryNo()%>"><%=c.getTitle()%></option>
+					<option value="<%=c.getCategoryNo()%>"><%=c.getTitle()%></option>
 		
 		<%
 				}

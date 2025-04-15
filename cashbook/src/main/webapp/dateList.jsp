@@ -37,6 +37,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+	<div>
+		<jsp:include page="/inc/nav.jsp"></jsp:include>
+	</div>
 	<h1><%=cashDate%> 수입/지출</h1>
 	<div>
 		<a href="/cashbook/cash/insertCashForm.jsp?cashDate=<%=cashDate%>">내역 추가</a>
@@ -49,6 +52,7 @@
 					<th>제목</th>
 					<th>가격</th>
 					<th>메모</th>
+					<th>상세정보</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -60,6 +64,7 @@
 							<td><%=c.getCategory().getTitle()%></td>
 							<td><%=c.getAmount()%>원</td>
 							<td><%=c.getMemo()%></td>
+							<td><a href="/cashbook/cash/cashOne.jsp?cashNo=<%=c.getCashNo()%>&cashDate=<%=cashDate%>">상세정보</a></td>
 						</tr>
 				<%		
 					}
