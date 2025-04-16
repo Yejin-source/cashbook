@@ -138,7 +138,7 @@ public class CategoryDao {
 	}
 	
 	
-	// 카테고리 추가 메서드 | 입력 후 자동으로 생성된 키값을 반환값으로 받기
+	// 카테고리 추가 메서드 | 중복 추가 불가능하게 수정 | 입력 후 자동으로 생성된 키값을 반환값으로 받기
 	public int insertCategory(Category category) throws ClassNotFoundException, SQLException {
 		int pk = 0;
 		
@@ -152,24 +152,44 @@ public class CategoryDao {
 		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cashbook", "root", "java1234");
 		
 		// 쿼리 작성
-		String sql = "INSERT INTO category(kind, title) VALUE(?,?)";
-		
-		// Statement.RETURN_GENERATED_KEYS 옵션: insert 후 select max(pk) from ... 실행
-		stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		String sql = "SELECT COUNT(*) cnt FROM category WHERE kind = ? AND title = ?";
+		stmt = conn.prepareStatement(sql);
 		stmt.setString(1, category.getKind());
 		stmt.setString(2, category.getTitle());
-		System.out.println("CategoryDao.java insertCategory_stmt: " + stmt); // 쿼리 디버깅
+		System.out.println("CategoryDao.java getTotal_stmt: " + stmt); // 쿼리 디버깅
 		
-		int row = stmt.executeUpdate(); // insert
-		rs = stmt.getGeneratedKeys(); // select max(no) from question
-		if(rs.next()) {
-			pk = rs.getInt(1);
-		}
+		rs = stmt.executeQuery(); // 쿼리 실행
+		rs.next();
+		int row = rs.getInt("cnt");
 		
-		if(row == 1) {
-			System.out.println("카테고리 추가 완료");
+		 // 카테고리가 중복이 아니라면
+		if(row == 0) {
+			PreparedStatement stmt2 = null;
+			ResultSet rs2 = null;
+			
+			// 쿼리 작성
+			String sql2 = "INSERT INTO category(kind, title) VALUE(?,?)";
+			
+			// Statement.RETURN_GENERATED_KEYS 옵션: insert 후 select max(pk) from ... 실행
+			stmt2 = conn.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
+			stmt2.setString(1, category.getKind());
+			stmt2.setString(2, category.getTitle());
+			System.out.println("CategoryDao.java insertCategory_stmt: " + stmt); // 쿼리 디버깅
+			
+			row = stmt.executeUpdate(); // insert
+			rs2 = stmt.getGeneratedKeys(); // select max(no) from question
+			
+			if(rs.next()) {
+				pk = rs.getInt(1);
+			}
+			
+			if(row == 1) {
+				System.out.println("카테고리 추가 완료");
+			} else {
+				System.out.println("카테고리 추가 실패");
+			}
 		} else {
-			System.out.println("카테고리 추가 실패");
+			System.out.println("이미 등록된 카테고리입니다.");
 		}
 		
 		conn.close(); // 연결 해제
