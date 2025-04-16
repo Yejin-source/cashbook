@@ -52,6 +52,7 @@
 					<th>제목</th>
 					<th>가격</th>
 					<th>메모</th>
+					<th>영수증</th>
 					<th>상세정보</th>
 				</tr>
 			</thead>
@@ -64,6 +65,22 @@
 							<td><%=c.getCategory().getTitle()%></td>
 							<td><%=c.getAmount()%>원</td>
 							<td><%=c.getMemo()%></td>
+							<td>
+								<%			
+									if(c.getReceit().getFilename() != null) {
+								%>
+										<p>&#128196; / &#x2705;</p>
+										
+								<%		
+									} else {
+								%>		
+			
+										<p>&#128196; / &#x274C;</p>
+								<%
+									}
+								%>
+								
+							</td>
 							<td><a href="/cashbook/cash/cashOne.jsp?cashNo=<%=c.getCashNo()%>&cashDate=<%=cashDate%>">상세정보</a></td>
 						</tr>
 				<%		

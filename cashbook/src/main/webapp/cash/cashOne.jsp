@@ -25,6 +25,11 @@
 	Cash c = new Cash();
 	CashDao cd = new CashDao();
 	c = cd.selectCashOne(cashNo);
+	
+	// 객체 형성 및 receitDao 사용
+	Receit r = new Receit();
+	ReceitDao rd = new ReceitDao();
+	r = rd.selectReceitOne(cashNo);
 %>
 
 <!-- View -->
@@ -56,10 +61,21 @@
 				}
 			</script>
 		</div>
-	<form method="post">
 		<table class="table table-striped table-hover">
 			<tr>
-				<th>가격</th>
+				<th>날짜</th>
+				<td><%=cashDate%></td>
+			</tr>
+			<tr>
+				<th>종류</th>
+				<td><%=c.getCategory().getKind()%></td>
+			</tr>
+			<tr>
+				<th>제목</th>
+				<td><%=c.getCategory().getTitle()%></td>
+			</tr>
+			<tr>
+				<th>금액</th>
 				<td><%=c.getAmount()%>원</td>					
 			</tr>
 			<tr>
@@ -71,23 +87,34 @@
 				<td><%=c.getColor()%></td>
 			</tr>
 			<tr>
-				<th>생성날짜</th>
-				<td><%=c.getCreatedate()%></td>
-			</tr>
-			<tr>
-				<th>갱신날짜</th>
-				<td><%=c.getUpdatedate()%></td>
+				<th>영수증</th>
+				<td>
+					<%
+						if(r.getFilename() == null) {
+					%>		
+							<!-- 영수증이 없는 경우 -->
+							<form action="/cashbook/cash/insertReceitForm.jsp?cashNo=<%=cashNo%>&cashDate=<%=cashDate%>" method="post" style="display:inline;">
+								<input type="hidden" name="cashNo" value="<%=cashNo%>">
+								<input type="hidden" name="cashDate" value="<%=cashDate%>">
+								<button type="submit">영수증 입력</button>
+							</form>
+					
+					<%		
+						} else {
+					%>		
+							<!-- 영수증이 있는 경우 -->
+							<img src="/cashbook/upload/<%=r.getFilename()%>" alt="영수증" width="100">
+							<form action="/cashbook/cash/deleteReceit.jsp?cashNo=<%=cashNo%>&cashDate=<%=cashDate%>" method="post" style="display:inline;">
+								<input type="hidden" name="cashNo" value="<%=cashNo%>">
+								<input type="hidden" name="cashDate" value="<%=cashDate%>">
+								<button type="submit">영수증 삭제</button>
+							</form>		
+					<%		
+						}
+					%>
+				</td>
 			</tr>
 		</table>
-	</form>
-	<form action="/cashbook/cash/insertReceitForm.jsp?cashNo=<%=cashNo%>&cashDate=<%=cashDate%>" method="post">
-		<input type="hidden" name="cashNo" value="cashNo">
-		<button type="submit">영수증 입력</button>
-	</form>
-	&nbsp;
-	<form action="/cashbook/cash/deleteReceit.jsp?cashNo=<%=cashNo%>&cashDate=<%=cashDate%>" method="post">	
-		<input type="hidden" name="cashNo" value="cashNo">
-		<button type="submit">영수증 삭제</button>
-	</form>
+			
 </body>
 </html>
