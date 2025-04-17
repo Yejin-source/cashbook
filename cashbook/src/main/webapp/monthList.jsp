@@ -92,6 +92,28 @@
 <body>
 	<h1>
 		<%=year%>년 <%=month+1%>월</h1>
+		<form action="/cashbook/monthList.jsp">
+		    <select name="targetYear">
+		        <% 
+		        	for(int y = 2020; y <=2025; y++) { 
+		        %>
+		            	<option value="<%=y%>" <%=(y == year ? "selected" : "")%>><%=y%>년</option>
+		        <% 
+		        	}
+		        %>
+		    </select>
+		    <select name="targetMonth">
+		        <% 
+		        	for(int m = 0; m < 12; m++) { 	
+		       	%>
+		            <option value="<%=m%>" <%=(m == month ? "selected" : "")%>><%=m+1%>월</option>
+		        <%
+		        	}	
+		        %>
+		    </select>
+		    <button type="submit">이동</button>
+		</form>
+		<a href="/cashbook/monthList.jsp">[오늘 날짜로]</a>		
 	<div>
 		<!-- 달력 페이징 네비게이션 -->
 		<a href="/cashbook/monthList.jsp?targetYear=<%=prevYear%>&targetMonth=<%=prevMonth%>">[이전 달]</a>

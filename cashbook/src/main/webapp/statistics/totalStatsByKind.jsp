@@ -2,7 +2,7 @@
 <%@page import="dto.*" %>
 <%@page import="model.*" %>
 <%@page import="java.util.*" %>
-<%@ page import="java.text.DecimalFormat" %>
+<%@page import="java.text.DecimalFormat" %>
 
 <!-- Controller -->
 <%	
@@ -52,33 +52,36 @@
 	</div>
 	
 	<h1>전체 수입/지출 통계</h1>
-		
 		<table class="table table-striped table-hover">
-			<tr>
-				<th>분류</th>
-				<th>건수</th>
-				<th>총액</th>
-			</tr>
-			<%
-				for (HashMap<String, Object> map : totalList) {
-					ArrayList<String> list = new ArrayList<>();
-			%>
-					<tr>
-						<td><%=map.get("kind")%></td>
-						<td><%=map.get("cnt")%>건</td>
-						<td>
-					        <%
-								// java.text.Decimalformat: 숫자 형식 지정하는 클래스
-								DecimalFormat formatter = new DecimalFormat("#,###");
-					        
-					            int amount = (int)map.get("sum"); // map은 Object 타입 -> 형변환 필요
-					            out.print(formatter.format(amount) + "원"); // 웹 브라우저에 출력할 거니까 out.print
-					        %>
-						 </td>
-					</tr>
-			<%
-				}
-			%>
+			<thead>
+				<tr>
+					<th>분류</th>
+					<th>건수</th>
+					<th>총액</th>
+				</tr>
+			</thead>	
+			<tbody>
+				<%
+					for(HashMap<String, Object> map : totalList) {
+						ArrayList<String> list = new ArrayList<>();
+				%>
+						<tr>
+							<td><%=map.get("kind")%></td>
+							<td><%=map.get("cnt")%>건</td>
+							<td>
+						        <%
+									// java.text.Decimalformat: 숫자 형식 지정하는 클래스
+									DecimalFormat formatter = new DecimalFormat("#,###");
+						        
+						            int amount = (int)map.get("sum"); // map은 Object 타입 -> 형변환 필요
+						            out.print(formatter.format(amount) + "원"); // 웹 브라우저에 출력할 거니까 out.print
+						        %>
+							 </td>
+						</tr>
+				<%
+					}
+				%>
+			</tbody>
 		</table>
 		
 		<a href="/cashbook/monthList.jsp">달력으로</a>

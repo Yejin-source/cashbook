@@ -125,7 +125,7 @@
 			<span class="emoji">📅</span>
 			가계부 달력
 		</a>
-		<a href="/cashbook/statistics.jsp" style="background-color: #e4c1f9;">
+		<a href="/cashbook/statistics/statistics.jsp" style="background-color: #e4c1f9;">
 			<span class="emoji">📊</span>
 			지출/수입 통계
 		</a>
