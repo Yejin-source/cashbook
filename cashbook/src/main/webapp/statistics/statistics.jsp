@@ -17,13 +17,18 @@
 	Calendar cal = Calendar.getInstance();
 	
     int year = cal.get(Calendar.YEAR);
+    int month = cal.get(Calendar.MONTH) + 1;
 
-    if (request.getParameter("year") != null) {
+    if(request.getParameter("year") != null) {
         year = Integer.parseInt(request.getParameter("year"));
+    }
+    if(request.getParameter("month") != null) {
+        year = Integer.parseInt(request.getParameter("month"));
     }
 
     // 값 확인
     System.out.println("statistics.jsp year: " + year);
+    System.out.println("statistics.jsp year: " + month);
     
     
 	// 객체 생성 후 해당하는 Dao 실행
@@ -34,8 +39,15 @@
 	
 	// 연도별 수입/지출 총액
 	ArrayList<HashMap<String, Object>> yearList = statsDao.yearStatsByKind(year);
-
+	
+	// 월별 수입/지출 총액
+	ArrayList<HashMap<String, Object>> monthList = statsDao.monthStatsByKind(month);
+	 
+	// 특정년도의 월별 수입/지출 총액
+	ArrayList<HashMap<String, Object>> targetYearList = statsDao.targetYearStatsByKind(year, month);
 %>
+
+<!-- View -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -92,16 +104,16 @@
 		
 		<table class="table table-striped table-hover">
 			<tr>
-				<th><%=year%>년 수입/지출 통계</th>
-				<th></th><th></th>
+				<th>연도별 수입/지출 통계</th>
 			</tr>
+			
 			<tr>
 				<th>분류</th>
 				<th>건수</th>
 				<th>총액</th>
 			</tr>
 			<%
-				for (HashMap<String, Object> map : yearList) {
+				for(HashMap<String, Object> map : yearList) {
 					ArrayList<String> list = new ArrayList<>();
 			%>
 					<tr>

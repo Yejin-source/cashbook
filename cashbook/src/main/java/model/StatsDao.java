@@ -26,7 +26,7 @@ public class StatsDao {
 		String sql = "SELECT kind, COUNT(*) cnt, SUM(amount) sum FROM category ct INNER JOIN cash cs"
 				+ " ON ct.category_no = cs.category_no GROUP BY ct.kind";
 		stmt = conn.prepareStatement(sql);
-		rs = stmt.executeQuery();
+		rs = stmt.executeQuery(); // 쿼리 실행
 		
 		while (rs.next()) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
@@ -56,10 +56,9 @@ public class StatsDao {
 		// 쿼리 작성
 		String sql = "SELECT YEAR(cash_date) year, kind, COUNT(*) cnt, SUM(amount) sum"
 				+ " FROM category ct INNER JOIN cash cs ON ct.category_no = cs.category_no"
-				+ " WHERE YEAR(cash_date) = ? GROUP BY YEAR(cash_date), ct.kind ORDER BY YEAR(cash_date)";
+				+ " GROUP BY YEAR(cash_date), ct.kind ORDER BY YEAR(cash_date)";
 		stmt = conn.prepareStatement(sql);
-		stmt.setInt(1, year);
-		rs = stmt.executeQuery();
+		rs = stmt.executeQuery(); // 쿼리 실행
 		
 		while (rs.next()) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
@@ -89,11 +88,10 @@ public class StatsDao {
 		
 		// 쿼리 작성
 		String sql = "SELECT MONTH(cash_date) month, kind, COUNT(*) cnt, SUM(amount) sum FROM category ct"
-				+ " INNER JOIN cash cs ON ct.category_no = cs.category_no WHERE MONTH(cash_date) = ?"
+				+ " INNER JOIN cash cs ON ct.category_no = cs.category_no"
 				+ " GROUP BY MONTH(cash_date), ct.kind ORDER BY MONTH(cash_date)";
 		stmt = conn.prepareStatement(sql);
-		stmt.setInt(1, month);
-		rs = stmt.executeQuery();
+		rs = stmt.executeQuery(); // 쿼리 실행
 		
 		while (rs.next()) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
@@ -124,12 +122,10 @@ public class StatsDao {
 		// 쿼리 작성
 		String sql = "SELECT MONTH(cash_date) month, kind, COUNT(*) cnt, SUM(amount) sum"
 				+ " FROM category ct INNER JOIN cash cs ON ct.category_no = cs.category_no"
-				+ " WHERE YEAR(cash_date) = ? AND MONTH(cash_date) = ?"
-				+ " GROUP BY MONTH(cash_date), ct.kind ORDER BY MONTH(cash_date)";
+				+ " WHERE YEAR(cash_date) = ? GROUP BY MONTH(cash_date), ct.kind ORDER BY MONTH(cash_date)";
 		stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, year);
-		stmt.setInt(2, month);
-		rs = stmt.executeQuery();
+		rs = stmt.executeQuery(); // 쿼리 실행
 		
 		while (rs.next()) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
