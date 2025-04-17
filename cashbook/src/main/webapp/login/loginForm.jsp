@@ -17,31 +17,47 @@
 <head>
 <meta charset="UTF-8">
 <title>Login Page</title>
-	<!-- Latest compiled and minified CSS -->
+	<!-- 부트스트랩 적용 (필요시 버튼/폼 정리용) -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	
-	<!-- Latest compiled JavaScript -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<style>
+		/* 로그인 버튼 스타일 */
+		.login-btn {
+		    background-color: #cdb4db;
+		    border: none;
+		    color: white;
+		    padding: 10px;
+		    font-size: 16px;
+		    border-radius: 8px;
+		    transition: background-color 0.3s ease;
+		}
+		
+		/* 로그인 버튼에 마우스 올렸을 때 */
+		.login-btn:hover {
+		    background-color: #b28dd0; /* 조금 더 진한 보라색으로 변화 */
+		    cursor: pointer;
+		}
+	</style>
 </head>
-<body>
-	<h1>로그인</h1>
-	<!-- nav.jsp 인클루드 -->
-	<div> <!-- 프로젝트명 생략하고 작성 -->
-		<jsp:include page="/inc/nav.jsp"></jsp:include>
-	</div>
+	<body class="bg-light d-flex flex-column align-items-center justify-content-center" style="min-height: 100vh;">
 	
-	<form action="/cashbook/login/loginAction.jsp" method="post">
-		<table class="table table-striped table-hover">
-			<tr>
-				<th>아이디</th>
-				<td><input type="text" name="id"></td>
-			</tr>
-			<tr>
-				<th>비밀번호</th>
-				<td><input type="password" name="pw"></td>
-			</tr>
-		</table>
-		<button type="submit">로그인</button>
-	</form>
-</body>
+		<div class="card p-4 shadow" style="width: 400px; background-color: #ffe5ec;">
+		    <h2 class="text-center mb-4">🔒 로그인</h2>
+		
+		    <form action="/cashbook/login/loginAction.jsp" method="post">
+		        <div class="mb-3">
+		            <label for="id" class="form-label">아이디</label>
+		            <input type="text" name="id" id="id" class="form-control" required>
+		        </div>
+		
+		        <div class="mb-3">
+		            <label for="pw" class="form-label">비밀번호</label>
+		            <input type="password" name="pw" id="pw" class="form-control" required>
+		        </div>
+		
+		        <div class="d-grid mt-4">
+		           <button type="submit" class="login-btn">로그인</button>
+		        </div>
+	   		 </form>
+		</div>
+	</body>
 </html>
