@@ -5,4 +5,5 @@
 	<a href="/cashbook/category/categoryList.jsp">[카테고리 목록]</a>
 	<a href="/cashbook/category/insertCategoryForm.jsp">[카테고리 추가]</a>
 	<a href="/cashbook/monthList.jsp">[달력]</a>
+	<a href="/cashbook/statistics.jsp">[지출/수입 통계]</a>
 </nav>

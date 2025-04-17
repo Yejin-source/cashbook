@@ -123,6 +123,7 @@
 									String cashDate = String.format("%04d-%02d-%02d", year, month+1, date); // yyyy-mm-dd 형식으로 설정
 									// %04 -> 총 4자리로 표현, 부족한만큼 앞을 0으로 채우기 | d -> 정수
 							%>	
+									
 									<a href="/cashbook/dateList.jsp?cashDate=<%=cashDate%>">
 										<%=date%>
 									</a><br>
@@ -132,9 +133,16 @@
 										
 										for(Cash c : list){ // for(자료형 변수 : 배열) -> 배열에 맞는 자료형 작성
 									%>
-												[<%=c.getCategory().getKind()%>]
-												<%=c.getCategory().getTitle()%><br>
-												<%=c.getAmount()%>원<br>
+										<div style="display: flex; align-items: center; margin: 3px 0;">
+									        
+									   		<div style="width: 10px; height: 10px; background-color: <%=c.getColor()%>; border-radius: 50%; margin-right: 10px;"></div>
+							
+									        <div style="background-color: rgba(<%=c.getColor()%>, 0.1); color: #333; padding: 5px; border-radius: 5px;">
+									            [<%=c.getCategory().getKind()%>]
+									            <%=c.getCategory().getTitle()%><br>
+									            <%=c.getAmount()%>원
+									        </div>
+    									</div>	
 									<%
 										}
 									%>

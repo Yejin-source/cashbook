@@ -17,7 +17,7 @@
 	<form action="/cashbook/category/insertCategoryAction.jsp" method="post">
 		<table class="table table-striped table-hover">
 			<tr>
-				<th>종류</th>
+				<th>분류</th>
 				<td>
 					<input type="radio" name="kind" value="지출"> 지출 <br>
 					<input type="radio" name="kind" value="수입"> 수입

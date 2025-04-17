@@ -6,7 +6,7 @@
 	String login = (String)(session.getAttribute("id")); // 세션에서 id 키에 저장된 값을 가져옴
 	
 	if(login != null) { // 로그인 상태라면
-		response.sendRedirect("/cashbook/category/categoryList.jsp");
+		response.sendRedirect("/cashbook/index.jsp");
 		return; // 코드 실행 중단
 	}
 %>
