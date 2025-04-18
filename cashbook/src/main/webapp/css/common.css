@@ -1,0 +1,192 @@
+@charset "UTF-8";
+
+/* 기본 폰트, 전체 배경 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f2e8ff; /* 연보라색 배경 */
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* 헤더 (페이지 상단 타이틀 영역) */
+.header {
+    background: linear-gradient(to right, #cce3ff, #e1d8ff, #ffd5e5); /* 하늘→연보라→분홍 그라데이션 */
+    padding: 0 20px;
+    height: 140px;
+    position: relative;
+    border-bottom: 2px solid #e1d8ff;
+    overflow: hidden;
+}
+.header h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    font-size: 2.2em;
+    color: #333;
+}
+
+/* 헤더 안에 있는 작은 링크들 (메인화면으로, 로그아웃 등) */
+.small-links {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    display: flex;
+    gap: 15px;
+}
+.small-links a {
+    font-size: 1em;
+    font-weight: 600;
+    color: #2c2c2c;
+    text-decoration: none;
+}
+.small-links a:hover {
+    text-decoration: underline;
+}
+
+/* 카드 박스 스타일 (폼이나 내용 묶는 박스) */
+.card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 50px auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    position: relative; 
+}
+
+/* 입력창 스타일 */
+input[type="text"],
+input[type="password"],
+input[type="number"] {
+    width: 95%;
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+/* 기본 버튼 스타일 (폼 전송 버튼 등) */
+.btn-submit {
+    width: 101%;
+    background-color: #e1d8ff; /* 연보라색 버튼 */
+    color: #333;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 살짝 그림자 */
+}
+.btn-submit:hover {
+    background-color: #c7b8ea; /* hover시 진한 연보라 */
+    cursor: pointer;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 90%;
+    margin: 30px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+th {
+    background-color: #e1d8ff;
+    color: #333;
+    text-align: center;
+    padding: 15px;
+}
+td {
+    text-align: center;
+    padding: 12px;
+}
+
+th, td {
+    border: 1px solid #e1d8ff;
+}
+
+/* '카테고리 추가' 같은 작은 추가 버튼 */
+.add-category-link {
+    background-color: #e1d8ff;
+    color: #333;
+    text-align: center;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: background-color 0.2s ease;
+    display: inline-block;
+}
+.add-category-link:hover {
+    background-color: #c7b8ea;
+}
+
+/* 기본 링크 스타일 */
+a {
+    color: #333;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* 네비게이션 카드 메뉴 */
+.nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin: 60px auto;
+    padding: 0 20px;
+    max-width: 900px;
+}
+
+.nav a {
+    text-decoration: none;
+    width: 200px;
+    height: 120px;
+    background-color: #ffe5ec;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: transform 0.2s ease;
+}
+
+.nav a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+
+/* 이모티콘 */
+.emoji {
+    font-size: 1.5em;
+    margin-bottom: 8px;
+}
+
+/* 돌아가기 링크 스타일 */
+.go-back-link {
+    font-size: 14px;
+    color: #666;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.go-back-link:hover {
+    color: #333;
+    text-decoration: underline;
+}

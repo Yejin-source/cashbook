@@ -2,6 +2,7 @@
 <%@ page import="java.util.*" %> 
 <%@ page import="dto.*" %> 
 <%@ page import="model.*" %> 
+<%@ page import="java.text.DecimalFormat" %>
 
 <!-- Controller -->
 <%
@@ -69,6 +70,8 @@
 	// CashDao 객체 형성
 	CashDao csDao = new CashDao();
 
+	// 금액 형식 설정 | java.text.Decimalformat: 숫자 형식 지정하는 클래스
+	DecimalFormat formatter = new DecimalFormat("#,###"); 
 %>
 
 <!-- View -->
@@ -77,111 +80,108 @@
 <head>
 <meta charset="UTF-8">
 <title>Month List</title>
-<style>
-	table {
-	    table-layout: fixed; /* 열 너비 고정 */
-	    width: 60%;
-	}
-	th, td {
-    text-align: center;         /* 가로 정렬 */
-    vertical-align: middle;     /* 세로 정렬 */
-    height: 70px; /* 원하는 고정 높이 값 */
-	}
-</style>
+	<link rel="stylesheet" type="text/css" href="/cashbook/css/monthList.css">
+
 </head>
 <body>
-	<h1>
-		<%=year%>년 <%=month+1%>월</h1>
-		<form action="/cashbook/monthList.jsp">
-		    <select name="targetYear">
-		        <% 
-		        	for(int y = 2020; y <=2025; y++) { 
-		        %>
-		            	<option value="<%=y%>" <%=(y == year ? "selected" : "")%>><%=y%>년</option>
-		        <% 
-		        	}
-		        %>
-		    </select>
-		    <select name="targetMonth">
-		        <% 
-		        	for(int m = 0; m < 12; m++) { 	
-		       	%>
-		            <option value="<%=m%>" <%=(m == month ? "selected" : "")%>><%=m+1%>월</option>
-		        <%
-		        	}	
-		        %>
-		    </select>
-		    <button type="submit">이동</button>
-		</form>
-		<a href="/cashbook/monthList.jsp">[오늘 날짜로]</a>		
-	<div>
-		<!-- 달력 페이징 네비게이션 -->
-		<a href="/cashbook/monthList.jsp?targetYear=<%=prevYear%>&targetMonth=<%=prevMonth%>">[이전 달]</a>
-		<a href="/cashbook/monthList.jsp?targetYear=<%=nextYear%>&targetMonth=<%=nextMonth%>">[다음 달]</a>
+ 	<div class="header">
+        <h1><%=year%>년 <%=month+1%>월 가계부</h1>
+        <div class="small-links">
+		    <a href="/cashbook/index.jsp">🏠 메인 화면으로</a>
+		</div>
+    </div>
+	<div class="calendar-controls">
+   		<div class="left">
+			<form action="/cashbook/monthList.jsp" style="text-align: center;">
+			    <select name="targetYear">
+			        <% 
+			        	for(int y = 2020; y <=2025; y++) { 
+			        %>
+			            	<option value="<%=y%>" <%=(y == year ? "selected" : "")%>><%=y%>년</option>
+			        <% 
+			        	}
+			        %>
+			    </select>
+			    <select name="targetMonth">
+			        <% 
+			        	for(int m = 0; m < 12; m++) { 	
+			       	%>
+			            <option value="<%=m%>" <%=(m == month ? "selected" : "")%>><%=m+1%>월</option>
+			        <%
+			        	}	
+			        %>
+			    </select>
+			    <button type="submit">이동</button>
+			</form>
+		</div>
+		<div class="calendar-nav">
+		    <a href="/cashbook/monthList.jsp?targetYear=<%=prevYear%>&targetMonth=<%=prevMonth%>">이전 달</a>
+		    <a href="/cashbook/monthList.jsp">오늘 날짜로</a>
+		    <a href="/cashbook/monthList.jsp?targetYear=<%=nextYear%>&targetMonth=<%=nextMonth%>">다음 달</a>
+		</div>
 	</div>
-	<form method="post">
-		<table border="1">
-			<tr>
-				<th>일</th>
-				<th>월</th>
-				<th>화</th>
-				<th>수</th>
-				<th>목</th>
-				<th>금</th>
-				<th>토</th>
-			</tr>
-			<tr>
-				<%
-					for(int i=1; i<=total; i++) {
-				%>
-						<td>
-							<%
-								if(i-startBlank < 1 || i-startBlank > lastDate) {
-							%>		
-									&nbsp;
-							<%		
-								} else {
-									int date = i-startBlank;
-									String cashDate = String.format("%04d-%02d-%02d", year, month+1, date); // yyyy-mm-dd 형식으로 설정
-									// %04 -> 총 4자리로 표현, 부족한만큼 앞을 0으로 채우기 | d -> 정수
-							%>	
-									
-									<a href="/cashbook/dateList.jsp?cashDate=<%=cashDate%>">
-										<%=date%>
-									</a><br>
-									<%
-										ArrayList<Cash> list = new ArrayList<>();
-										list = csDao.selectCashByDate(cashDate);
+		<form method="post">
+			<table border="1">
+				<tr>
+					<th class="sun">일</th>
+					<th>월</th>
+					<th>화</th>
+					<th>수</th>
+					<th>목</th>
+					<th>금</th>
+					<th class="sat">토</th>
+				</tr>
+				<tr>
+					<%
+						for(int i=1; i<=total; i++) {
+					%>
+							<td>
+								<%
+									if(i-startBlank < 1 || i-startBlank > lastDate) {
+								%>		
+										&nbsp;
+								<%		
+									} else {
+										int date = i-startBlank;
+										String cashDate = String.format("%04d-%02d-%02d", year, month+1, date); // yyyy-mm-dd 형식으로 설정
+										// %04 -> 총 4자리로 표현, 부족한만큼 앞을 0으로 채우기 | d -> 정수
+								%>	
 										
-										for(Cash c : list){ // for(자료형 변수 : 배열) -> 배열에 맞는 자료형 작성
-									%>
-										<div style="display: flex; align-items: center; margin: 3px 0;">
-									        
-									   		<div style="width: 10px; height: 10px; background-color: <%=c.getColor()%>; border-radius: 50%; margin-right: 10px;"></div>
-							
-									        <div style="background-color: rgba(<%=c.getColor()%>, 0.1); color: #333; padding: 5px; border-radius: 5px;">
-									            [<%=c.getCategory().getKind()%>]
-									            <%=c.getCategory().getTitle()%><br>
-									            <%=c.getAmount()%>원
-									        </div>
-    									</div>	
-									<%
-										}
-									%>
-							<%		
-								}
-							%>
-						</td>	
-				<%		
-						if(i % 7 == 0) { // 한 행이 7열이 되도록
-				%>
-							</tr><tr>
-				<%			
+										<a href="/cashbook/dateList.jsp?cashDate=<%=cashDate%>">
+											<%=date%>
+										</a><br>
+										<%
+											ArrayList<Cash> list = new ArrayList<>();
+											list = csDao.selectCashByDate(cashDate);
+											
+											for(Cash c : list){ // for(자료형 변수 : 배열) -> 배열에 맞는 자료형 작성
+										%>
+												<div class="cash-info <%=c.getCategory().getKind().equals("수입") ? "income-box" : "expense-box"%>">
+											        <span class="emoji">
+											            <%=c.getCategory().getKind().equals("수입") ? "💰" : "💸"%>
+											        </span>
+											        <div>
+											            <%=c.getCategory().getTitle()%><br>
+											            <%=formatter.format(c.getAmount())%>원
+											        </div>
+												</div>
+										<%
+											}
+										%>
+								<%		
+									}
+								%>
+							</td>	
+					<%		
+							if(i % 7 == 0) { // 한 행이 7열이 되도록
+					%>
+								</tr><tr>
+					<%			
+							}
 						}
-					}
-				%>
-			</tr>
-		</table>
-	</form>
+					%>
+				</tr>
+			</table>
+		</form>
 </body>
 </html>

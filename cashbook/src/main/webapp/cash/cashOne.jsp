@@ -2,6 +2,7 @@
 <%@ page import="dto.*" %>
 <%@ page import="model.*" %>
 <%@ page import="java.util.*" %>
+<%@ page import="java.text.DecimalFormat" %>
 
 <!-- Controller -->
 <%
@@ -30,6 +31,10 @@
 	Receit r = new Receit();
 	ReceitDao rd = new ReceitDao();
 	r = rd.selectReceitOne(cashNo);
+	
+
+	// 금액 형식 설정 | java.text.Decimalformat: 숫자 형식 지정하는 클래스
+	DecimalFormat formatter = new DecimalFormat("#,###"); 
 %>
 
 <!-- View -->
@@ -37,38 +42,71 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
-	<!-- Latest compiled and minified CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	
-	<!-- Latest compiled JavaScript -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<title>Cash One</title>
+	<link rel="stylesheet" type="text/css" href="/cashbook/css/common.css">
+	<style>
+		.receit-btn {
+		    background-color: #e1d8ff;
+		    color: #333;
+		    padding: 8px 16px;
+		    border: none;
+		    border-radius: 10px;
+		    font-weight: bold;
+		    font-size: 14px;
+		    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+		    transition: all 0.2s ease;
+		    cursor: pointer;
+		}
+		.receit-btn:hover {
+		    background-color: #c7b8ea;
+		}
+			
+			
+	</style>
 </head>
 <body>
-	<div>
-		<jsp:include page="/inc/nav.jsp"></jsp:include>
-	</div>
-	<h2><%=cashDate%></h2>
-	<h1>[<%=c.getCategory().getKind()%>] <%=c.getCategory().getTitle()%> 상세정보</h1>
-		<div>
-			<a href="/cashbook/cash/updateCashForm.jsp?cashNo=<%=cashNo%>&cashDate=<%=cashDate%>">내역 수정</a>
-			<a href="javascript:void(0);" onclick="confirmDelete(<%=cashNo%>, '<%=cashDate%>')">내역 삭제</a>
-			<script>
-				function confirmDelete(cashNo, cashDate) { // 삭제 확인창 띄우기
-					if (confirm("삭제하시겠습니까?")) {
-						location.href="/cashbook/cash/deleteCash.jsp?cashNo="+cashNo+"&cashDate="+cashDate;
-					}
-				}
-			</script>
+	<div class="header">
+		<h2><%=cashDate%></h2>
+        <h1>	
+        	[<%=c.getCategory().getKind().equals("수입") ? "💰수입" : "💸지출"%>] 
+        	<%=c.getCategory().getTitle()%> 상세정보
+        </h1>
+        <div class="small-links">
+		    <a href="/cashbook/dateList.jsp?cashDate=<%=cashDate%>">↩️ 이전 페이지</a>
 		</div>
-		<table class="table table-striped table-hover">
+    </div>
+	
+	<div style="width: 90%; margin: 20px auto; display: flex; justify-content: flex-start; gap: 20px;">
+	    <a href="/cashbook/cash/updateCashForm.jsp?cashNo=<%=cashNo%>&cashDate=<%=cashDate%>" 
+	       class="add-category-link" style="background-color: #d0f4de;">
+	       📝 내역 수정
+	    </a>
+	    <a href="javascript:void(0);" onclick="confirmDelete(<%=cashNo%>, '<%=cashDate%>')" 
+	       class="add-category-link" 
+	       style="background-color: #ffd5e5;">
+	       ❌ 내역 삭제
+	    </a>
+	</div>
+	<!-- 
+		<script>
+			function confirmDelete(cashNo, cashDate) { // 삭제 확인창 띄우기
+				if (confirm("삭제하시겠습니까?")) {
+					location.href="/cashbook/cash/deleteCash.jsp?cashNo="+cashNo+"&cashDate="+cashDate;
+				}
+			}
+		</script>
+	 -->
+	
+		<table>
 			<tr>
 				<th>날짜</th>
 				<td><%=cashDate%></td>
 			</tr>
 			<tr>
-				<th>종류</th>
-				<td><%=c.getCategory().getKind()%></td>
+				<th>분류</th>
+				<td>
+				    <%=c.getCategory().getKind().equals("수입") ? "💰 수입" : "💸 지출"%>
+				</td>
 			</tr>
 			<tr>
 				<th>제목</th>
@@ -76,15 +114,11 @@
 			</tr>
 			<tr>
 				<th>금액</th>
-				<td><%=c.getAmount()%>원</td>					
+				<td><%=formatter.format(c.getAmount())%>원</td>					
 			</tr>
 			<tr>
 				<th>메모</th>
 				<td><%=c.getMemo()%></td>
-			</tr>
-			<tr>
-				<th>색상</th>
-				<td><%=c.getColor()%></td>
 			</tr>
 			<tr>
 				<th>영수증</th>
@@ -96,7 +130,7 @@
 							<form action="/cashbook/cash/insertReceitForm.jsp?cashNo=<%=cashNo%>&cashDate=<%=cashDate%>" method="post" style="display:inline;">
 								<input type="hidden" name="cashNo" value="<%=cashNo%>">
 								<input type="hidden" name="cashDate" value="<%=cashDate%>">
-								<button type="submit">영수증 입력</button>
+								<button type="submit" class="receit-btn">🧾 영수증 입력</button>
 							</form>
 					
 					<%		
@@ -107,7 +141,7 @@
 							<form action="/cashbook/cash/deleteReceit.jsp?cashNo=<%=cashNo%>&cashDate=<%=cashDate%>" method="post" style="display:inline;">
 								<input type="hidden" name="cashNo" value="<%=cashNo%>">
 								<input type="hidden" name="cashDate" value="<%=cashDate%>">
-								<button type="submit">영수증 삭제</button>
+								<button type="submit" class="receit-btn">🗑️ 영수증 삭제</button>
 							</form>		
 					<%		
 						}

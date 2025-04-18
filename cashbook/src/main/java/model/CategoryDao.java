@@ -176,11 +176,11 @@ public class CategoryDao {
 			stmt2.setString(2, category.getTitle());
 			System.out.println("CategoryDao.java insertCategory_stmt: " + stmt); // 쿼리 디버깅
 			
-			row = stmt.executeUpdate(); // insert
-			rs2 = stmt.getGeneratedKeys(); // select max(no) from question
+			row = stmt2.executeUpdate(); // insert
+			rs2 = stmt2.getGeneratedKeys(); // select max(no) from question
 			
-			if(rs.next()) {
-				pk = rs.getInt(1);
+			if(rs2.next()) {
+				pk = rs2.getInt(1);
 			}
 			
 			if(row == 1) {

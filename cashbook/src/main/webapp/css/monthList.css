@@ -1,0 +1,219 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+body {
+    background-color: #f2e8ff;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.calendar-header {
+    margin: 30px auto 20px;
+    width: 400px;
+    padding: 15px;
+    background: #d0f4de;
+    text-align: center;
+    border-radius: 15px;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #333;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    font-family: 'Poppins', sans-serif;
+}
+
+.calendar-nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.calendar-nav a {
+    background-color: #d0f4de;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.calendar-nav a:hover {
+    background-color: #bde0fe;
+}
+
+.calendar-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    padding-top: 20px;
+    margin: 0 auto 10px auto;
+}
+
+.calendar-controls .left form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.calendar-controls .right {
+    display: flex;
+    gap: 10px;
+}
+
+.calendar-controls a, .calendar-controls button {
+    background-color: #d0f4de;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border: none;
+}
+
+.calendar-controls a:hover, .calendar-controls button:hover {
+    background-color: #bde0fe;
+}
+
+
+table {
+    margin: 0 auto;
+    width: 80%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+th {
+    padding: 15px 0;
+    font-weight: bold;
+    border: 1px solid #e1d8ff;
+    background-color: #e1d8ff;
+}
+
+th.sun {
+    color: #ff6b6b; /* 일요일 빨강 */
+}
+
+th.sat {
+    color: #4d6aff; /* 토요일 파랑 */
+}
+
+td {
+    height: 80px;
+    vertical-align: top;
+    border: 1px solid #e1d8ff;
+    text-align: left;
+    padding: 5px;
+}
+
+td a {
+    display: inline-block;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+td a:hover {
+    color: #8e7cc3;
+}
+
+/* 수입/지출 정보 */
+.cash-info {
+    margin-top: 4px;
+    padding: 3px 5px;
+    border-radius: 5px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.income-box {
+    background-color: #d0f4de; /* 연초록 */
+    color: #333;
+}
+.expense-box {
+    background-color: #ffd5e5; /* 연분홍 */
+    color: #333;
+}
+
+/* 점 */
+.color-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #aaa;
+}
+
+/* select box */
+select {
+    border: 1px solid #d0f4de;
+    background-color: #f8f9fa;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin: 0 5px;
+}
+select:hover {
+    background-color: #e0f7fa;
+}
+
+button {
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background-color: #e1d8ff;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #c7b8ea;
+}
+
+/* 헤더 (페이지 상단 타이틀 영역) */
+.header {
+    background: linear-gradient(to right, #cce3ff, #e1d8ff, #ffd5e5); /* 하늘→연보라→분홍 그라데이션 */
+    padding: 0 20px;
+    height: 140px;
+    position: relative;
+    border-bottom: 2px solid #e1d8ff;
+    overflow: hidden;
+}
+.header h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    font-size: 2.2em;
+    color: #333;
+}
+
+/* 헤더 안에 있는 작은 링크들 (메인화면으로, 로그아웃 등) */
+.small-links {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    display: flex;
+    gap: 15px;
+}
+.small-links a {
+    font-size: 1em;
+    font-weight: 600;
+    color: #2c2c2c;
+    text-decoration: none;
+}
+.small-links a:hover {
+    text-decoration: underline;
+}
+
