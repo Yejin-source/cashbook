@@ -8,7 +8,7 @@
 <!-- Controller -->
 <%
 	// 필요한 값 가져오기
-	int cashNo = Integer.parseInt(request.getParameter("cashNo"));
+	int cashNo = Integer.valueOf(request.getParameter("cashNo"));
 	String cashDate = request.getParameter("cashDate");
 	
 	Part part = request.getPart("receit"); // 파일을 받는 API | <input type="file"> name 속성과 일치해야 함
@@ -16,7 +16,7 @@
 
 	// 받은 값 확인
 	System.out.println("insertReceitAction.jsp cashNo: " + cashNo);
-	System.out.println("deleteReceit.jsp cashDate: " + cashDate);
+	System.out.println("insertReceitAction.jsp cashDate: " + cashDate);
 	System.out.println("insertReceitAction.jsp originalName: " + originalName);
 	
 	

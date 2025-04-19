@@ -126,12 +126,11 @@
 					<%
 						if(r.getFilename() == null) {
 					%>		
-							<!-- 영수증이 없는 경우 -->
-							<form action="/cashbook/cash/insertReceitForm.jsp?cashNo=<%=cashNo%>&cashDate=<%=cashDate%>" method="post" style="display:inline;">
-								<input type="hidden" name="cashNo" value="<%=cashNo%>">
-								<input type="hidden" name="cashDate" value="<%=cashDate%>">
-								<button type="submit" class="receit-btn">🧾 영수증 입력</button>
-							</form>
+							<!-- 영수증이 없는 경우 --> 
+							<!-- 단순히 조회하는 경우에는 get 방식으로 충분함 -->
+							<a href="/cashbook/cash/insertReceitForm.jsp?cashNo=<%=cashNo%>&cashDate=<%=cashDate%>">
+								🧾 영수증 입력
+							</a>
 					
 					<%		
 						} else {

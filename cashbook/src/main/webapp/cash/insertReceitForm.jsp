@@ -15,8 +15,8 @@
 	String cashDate = request.getParameter("cashDate");
 
 	// 받은 값 확인
-	System.out.println("insertReceitAction.jsp cashNo: " + cashNo);
-	System.out.println("deleteReceit.jsp cashDate: " + cashDate);
+	System.out.println("insertReceitForm.jsp cashNo: " + cashNo);
+	System.out.println("insertReceitForm.jsp cashDate: " + cashDate);
 
 %>
 
@@ -39,7 +39,7 @@
     <!-- enctype="application/x-www-form-urlencoded" -> 디폴트값_문자열 -->
     	<input type="hidden" name="cashNo" value="<%=cashNo%>">
     	<input type="hidden" name="cashDate" value="<%=cashDate%>">
-		<div>영수증: <input type="file" name="receit" /></div>
+		<div>영수증: <input type="file" name="receit"></div>
 		<button type="submit">영수증 등록</button>
     </form>
     </body>
