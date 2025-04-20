@@ -49,40 +49,88 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>statistics</title>
-	<!-- Latest compiled and minified CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<title>Target Year Statistics</title>
+	<link rel="stylesheet" type="text/css" href="/cashbook/css/common.css">
+	<style>
+		.controls {
+		    display: flex;
+		    justify-content: flex-start;
+		    align-items: center auto;
+		    width: 90%;
+		    padding-top: 20px;
+		    margin: 0 auto 10px auto;
+		}
+		
+		.controls .left form {
+		    display: flex;
+		    gap: 10px;
+		    align-items: center;
+		}
+		
+		.controls a, .controls button {
+		    background-color: #d0f4de;
+		    padding: 8px 14px;
+		    border-radius: 8px;
+		    font-weight: bold;
+		    color: #333;
+		    text-decoration: none;
+		    transition: background-color 0.3s;
+		    border: none;
+		}
+		
+		.controls a:hover, .controls button:hover {
+		    background-color: #bde0fe;
+		}
+		
+		.controls select {
+     	    padding: 8px 12px;
+	        border-radius: 8px;
+	        border: 2px solid #d0f4de;
+	        background-color: #ffffff;
+	        font-size: 14px;
+	        font-weight: bold;
+	        color: #333;
+	        transition: border-color 0.3s;
+	        cursor: pointer;
+	    }
 	
-	<!-- Latest compiled JavaScript -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	    .controls select:hover {
+	        border-color: #bde0fe;
+	    }
+	</style>
 </head>
 <body>
-	<div>
-		<jsp:include page="/inc/nav.jsp"></jsp:include>
+	<div class="header">
+		<h1>📈 <%=year%>년도 월별 수입/지출 통계</h1>
+		<div class="small-links">
+		    <a href="/cashbook/statistics/statistics.jsp">📊 이전 페이지</a>
+		    <a href="/cashbook/index.jsp">🏠 메인 화면으로</a>
+		</div>
 	</div>
-	
-	<h1><%=year%>년도 월별 수입/지출 통계</h1>
-		<form action="/cashbook/statistics/targetYearStatsByKind.jsp">
-		    <select name="year">
-		        <% 
-		            int targetYear = Calendar.getInstance().get(Calendar.YEAR);
-		            // 최근 5년 동안 선택할 수 있도록 설정
-		            for(int i = targetYear; i >= targetYear - 5; i--) {
-		        %>
-		            <option value="<%=i%>" <%=(i == year ? "selected" : "")%>><%=i%>년</option>
-		        <% 
-		            } 
-		        %>
-		    </select>
-		    <button type="submit">조회</button>
-		</form>
-	
-		<table class="table table-striped table-hover">
+	<div class="controls">
+   		<div class="left">
+			<form action="/cashbook/statistics/targetYearStatsByKind.jsp" style="text-align: center;">
+			    <select name="year">
+			        <% 
+			            int targetYear = Calendar.getInstance().get(Calendar.YEAR);
+			            // 최근 5년 동안 선택할 수 있도록 설정
+			            for(int i = targetYear; i >= targetYear - 5; i--) {
+			        %>
+			            <option value="<%=i%>" <%=(i == year ? "selected" : "")%>><%=i%>년</option>
+			        <% 
+			            } 
+			        %>
+			    </select>
+			    <button type="submit">조회</button>
+			</form>
+		</div>
+	</div>
+		<table>
 			 <thead>
 	            <tr>
                     <th>월</th>
                     <th>분류</th> <!-- 수입 or 지출 -->
-                    <th>총 건수</th>
+                    <th>건수</th>
                     <th>총액</th>
                 </tr>
 	        </thead>
@@ -93,16 +141,27 @@
                 %>
 						<tr>
 							<td><%=map.get("month")%>월</td>
-							<td><%=map.get("kind")%></td>
+							<td><%=map.get("kind").equals("수입") ? "💰 수입" : "💸 지출"%></td>
 							<td><%=map.get("cnt")%>건</td>
-							<td><%=formatter.format(map.get("sum"))%>원</td>
+							<td>
+								<% 
+									if(map.get("kind").equals("수입")) {
+								%>		
+										<span style="color:blue; font-size: 12px;">▲</span> <%=formatter.format(map.get("sum"))%>원
+								<%
+									} else {
+								%>
+										 <span style="color:red; font-size: 12px;">▼</span> <%=formatter.format(map.get("sum"))%>원
+								<%		
+									}
+								%>
+							</td>
 						</tr>
 				<%
 					}
 				%>
 			</tbody>
 		</table>
-		<a href="/cashbook/monthList.jsp">달력으로 돌아가기</a>
 	</body>
 	</body>
 </html>

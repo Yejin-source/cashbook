@@ -39,20 +39,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>statistics</title>
-	<!-- Latest compiled and minified CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	
-	<!-- Latest compiled JavaScript -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<title>Total Statistics</title>
+	<link rel="stylesheet" type="text/css" href="/cashbook/css/common.css">
 </head>
 <body>
-	<div>
-		<jsp:include page="/inc/nav.jsp"></jsp:include>
-	</div>
-	
-	<h1>전체 수입/지출 통계</h1>
-		<table class="table table-striped table-hover">
+	<div class="header">
+		<h1>💰 전체 수입/지출 통계</h1>
+		<div class="small-links">
+		    <a href="/cashbook/statistics/statistics.jsp">📊 이전 페이지</a>
+		    <a href="/cashbook/index.jsp">🏠 메인 화면으로</a>
+		</div>
+	</div>	
+		<table>
 			<thead>
 				<tr>
 					<th>분류</th>
@@ -66,25 +64,32 @@
 						ArrayList<String> list = new ArrayList<>();
 				%>
 						<tr>
-							<td><%=map.get("kind")%></td>
+							<td><%=map.get("kind").equals("수입") ? "💰 수입" : "💸 지출"%></td>
 							<td><%=map.get("cnt")%>건</td>
 							<td>
 						        <%
 									// java.text.Decimalformat: 숫자 형식 지정하는 클래스
 									DecimalFormat formatter = new DecimalFormat("#,###");
 						        
-						            int amount = (int)map.get("sum"); // map은 Object 타입 -> 형변환 필요
-						            out.print(formatter.format(amount) + "원"); // 웹 브라우저에 출력할 거니까 out.print
+						            // int amount = (int)map.get("sum"); // map은 Object 타입 -> 형변환 필요
+						            // out.print(formatter.format(amount) + "원"); // 웹 브라우저에 출력할 거니까 out.print
+						       
+						        	if(map.get("kind").equals("수입")) {
+								%>		
+										<span style="color:blue; font-size: 12px;">▲</span> <%=formatter.format(map.get("sum"))%>원
+								<%
+									} else {
+								%>
+										 <span style="color:red; font-size: 12px;">▼</span> <%=formatter.format(map.get("sum"))%>원
+								<%		
+									}
 						        %>
-							 </td>
+							</td>
 						</tr>
 				<%
 					}
 				%>
 			</tbody>
 		</table>
-		
-		<a href="/cashbook/monthList.jsp">달력으로</a>
-		<a href="/cashbook/index.jsp">홈으로</a>
 	</body>
 </html>

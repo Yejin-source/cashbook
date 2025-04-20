@@ -73,9 +73,9 @@
 		<table>
 			<thead>
 				<tr>
-					<th>종류</th>
+					<th>분류</th>
 					<th>제목</th>
-					<th>가격</th>
+					<th>금액</th>
 					<th>메모</th>
 					<th>영수증</th>
 					<th>비고</th>

@@ -85,7 +85,7 @@
 </head>
 <body>
  	<div class="header">
-        <h1><%=year%>년 <%=month+1%>월 가계부</h1>
+        <h1>📅 <%=year%>년 <%=month+1%>월 가계부</h1>
         <div class="small-links">
 		    <a href="/cashbook/index.jsp">🏠 메인 화면으로</a>
 		</div>

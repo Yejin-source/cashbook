@@ -45,24 +45,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
-	<!-- Latest compiled and minified CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	
-	<!-- Latest compiled JavaScript -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<title>Month Statistics</title>
+	<link rel="stylesheet" type="text/css" href="/cashbook/css/common.css">
 </head>
 <body>
-	<div>
-		<jsp:include page="/inc/nav.jsp"></jsp:include>
+	<div class="header">
+		<h1>🗓️ 월별 수입/지출 통계</h1>
+		<div class="small-links">
+		    <a href="/cashbook/statistics/statistics.jsp">📊 이전 페이지</a>
+		    <a href="/cashbook/index.jsp">🏠 메인 화면으로</a>
+		</div>
 	</div>
-	
-	<h1>월별 수입/지출 통계</h1>
-		<table class="table table-striped table-hover">
+		<table>
 			 <thead>
 	            <tr>
                     <th>월</th>
                     <th>분류</th> <!-- 수입 or 지출 -->
+                    <th>건수</th>
                     <th>총액</th>
                 </tr>
 	        </thead>
@@ -73,14 +72,26 @@
                 %>
 						<tr>
 							<td><%=map.get("month")%>월</td>
-							<td><%=map.get("kind")%></td>
-							<td><%=formatter.format(map.get("sum"))%>원</td>
+							<td><%=map.get("kind").equals("수입") ? "💰 수입" : "💸 지출"%></td>
+							<td><%=map.get("cnt")%>건</td>
+							<td>
+								<% 
+									if(map.get("kind").equals("수입")) {
+								%>		
+										<span style="color:blue; font-size: 12px;">▲</span> <%=formatter.format(map.get("sum"))%>원
+								<%
+									} else {
+								%>
+										 <span style="color:red; font-size: 12px;">▼</span> <%=formatter.format(map.get("sum"))%>원
+								<%		
+									}
+								%>
+							</td>
 						</tr>
 				<%
 					}
 				%>
 			</tbody>
 		</table>
-		<a href="/cashbook/monthList.jsp">달력으로 돌아가기</a>
 	</body>
 </html>

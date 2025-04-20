@@ -81,9 +81,8 @@
 	       class="add-category-link" style="background-color: #d0f4de;">
 	       📝 내역 수정
 	    </a>
-	    <a href="javascript:void(0);" onclick="confirmDelete(<%=cashNo%>, '<%=cashDate%>')" 
-	       class="add-category-link" 
-	       style="background-color: #ffd5e5;">
+	    <a href="/cashbook/cash/deleteCash.jsp?cashNo=<%=cashNo%>&cashDate=<%=cashDate%>" 
+	       class="add-category-link" style="background-color: #ffd5e5;">
 	       ❌ 내역 삭제
 	    </a>
 	</div>
@@ -119,6 +118,15 @@
 			<tr>
 				<th>메모</th>
 				<td><%=c.getMemo()%></td>
+			</tr>
+			<tr>
+			    <th>색상</th>
+			    <td style="text-align: center;">
+			        <div style="display: inline-flex; align-items: center; gap: 8px;">
+			            <div style="width: 18px; height: 18px; background-color: <%=c.getColor()%>; border-radius: 6px; border: 1px solid #ccc;"></div>
+			            <span><%=c.getColor()%></span>
+			        </div>
+			    </td>
 			</tr>
 			<tr>
 				<th>영수증</th>

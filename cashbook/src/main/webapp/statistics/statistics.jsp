@@ -21,25 +21,31 @@
 <head>
 <meta charset="UTF-8">
 <title>statistics</title>
-	<!-- Latest compiled and minified CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	
-	<!-- Latest compiled JavaScript -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/cashbook/css/common.css">
 </head>
 <body>
+	<div class="header">
+        <h1>📊 수입/지출 통계</h1>
+	    <div class="small-links">
+		    <a href="/cashbook/index.jsp">🏠 메인 화면으로</a>
+		</div>
+	 </div>
 	<div class="nav">
-		<a href="/cashbook/statistics/totalStatsByKind.jsp">
+		<a href="/cashbook/statistics/totalStatsByKind.jsp" style="background-color: #ffeb99;">
+			<span class="emoji">💰</span>
 			전체 수입/지출 총액
 		</a>
-		<a href="/cashbook/statistics/yearStatsByKind.jsp">
+		<a href="/cashbook/statistics/yearStatsByKind.jsp" style="background-color: #d0f4de;">
+			<span class="emoji">📅</span>
 			연도별 수입/지출 총액
 		</a>
-		<a href="/cashbook/statistics/monthStatsByKind.jsp">
+		<a href="/cashbook/statistics/monthStatsByKind.jsp" style="background-color: #a9def9;">
+			<span class="emoji">🗓️</span>
 			월별 수입/지출 총액
 		</a>
-		<a href="/cashbook/statistics/targetYearStatsByKind.jsp">
-			특정년도의 월별 수입/지출 총액
+		<a href="/cashbook/statistics/targetYearStatsByKind.jsp" style="background-color: #e4c1f9;">
+			<span class="emoji">📈</span>
+			특정년도 월별 <br> 수입/지출 총액
 		</a>
 	</div>
 	</body>

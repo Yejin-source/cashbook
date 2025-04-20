@@ -72,7 +72,7 @@
 <body>
 	 <!-- 헤더 영역 -->
     <div class="header">
-        <h1>카테고리 목록</h1>
+        <h1>📁 카테고리 목록</h1>
         <div class="small-links">
 		    <a href="/cashbook/index.jsp">🏠 메인 화면으로</a>
 		    <a href="/cashbook/login/logout.jsp">🚪 로그아웃</a>
@@ -88,7 +88,7 @@
 					<th>번호</th>
 					<th>분류</th>
 					<th>제목</th>
-					<th>날짜 & 시간</th>
+					<th>날짜</th>
 					<th>관리</th>
 				</tr>
 			</thead>
@@ -106,7 +106,7 @@
 							    <% } %>
 							</td>
 							<td><%=c.getTitle()%></td>
-							<td><%=c.getCreatedate()%></td>
+							<td><%=c.getCreatedate().substring(0, 10)%></td>
 							<td> <!-- 링크에 값 넘기는 거 그만 까먹기로 해요 우리.............. -->
 								<a href="/cashbook/category/updateCategoryTitleForm.jsp?categoryNo=<%=c.getCategoryNo()%>" class="edit-btn">수정</a>
    								<a href="/cashbook/category/deleteCategory.jsp?categoryNo=<%=c.getCategoryNo()%>" class="delete-btn">삭제</a>

@@ -66,7 +66,7 @@
 	<div class="card position-relative">
 	
 		<div style="width: 400px; margin: 0 auto; display: flex; justify-content: flex-end; margin-bottom: 10px;">
-		    <a href="/cashbook/category/categoryList.jsp" class="go-back-link">📁 카테고리 목록으로</a>
+		    <a href="/cashbook/category/categoryList.jsp" class="go-back-link">↩️ 이전 페이지</a>
 		</div>
 		
 	    <h2 style="margin-top: 10px;">➕ 카테고리 추가</h2>
