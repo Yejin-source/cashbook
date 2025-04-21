@@ -144,7 +144,7 @@
 						} else {
 					%>		
 							<!-- 영수증이 있는 경우 -->
-							<img src="/cashbook/upload/<%=r.getFilename()%>" alt="영수증" width="100">
+							<img src="/cashbook/upload/<%=r.getFilename()%>" alt="영수증" width="100"><br>
 							<form action="/cashbook/cash/deleteReceit.jsp?cashNo=<%=cashNo%>&cashDate=<%=cashDate%>" method="post" style="display:inline;">
 								<input type="hidden" name="cashNo" value="<%=cashNo%>">
 								<input type="hidden" name="cashDate" value="<%=cashDate%>">
